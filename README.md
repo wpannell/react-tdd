@@ -1,1 +1,1 @@
-# react-teropa
+# react-tdd (teropa)
