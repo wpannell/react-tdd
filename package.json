@@ -1,0 +1,19 @@
+{
+  "name": "react-tdd",
+  "version": "1.0.0",
+  "description": "teropa react tdd tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wpannell/react-tdd.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wpannell/react-tdd/issues"
+  },
+  "homepage": "https://github.com/wpannell/react-tdd#readme"
+}
