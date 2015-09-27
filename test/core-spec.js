@@ -4,10 +4,10 @@ import {loadEntriesInto, next} from '../src/core';
 
 describe('core logic', () => {
 
-  describe('load entries produces new state ', () => {
+  describe('load entries produces state ', () => {
 
     it('from immutable', () => {
-      const state = new Map();
+      const state = Map();
 
       const entries = (List.of(
         'trainspotting',
@@ -16,7 +16,7 @@ describe('core logic', () => {
 
       const nextState = loadEntriesInto(state, entries);
 
-      expect(nextState).to.equal(new Map({
+      expect(nextState).to.equal(Map({
         entries: List.of(
           'trainspotting',
           '28 days later'
@@ -24,7 +24,7 @@ describe('core logic', () => {
     });
 
     it('from iterable', () => {
-      const state = new Map();
+      const state = Map();
 
       const entries = [
         'trainspotting',
@@ -33,7 +33,7 @@ describe('core logic', () => {
 
       const nextState = loadEntriesInto(state, entries);
 
-      expect(nextState).to.equal(new Map({
+      expect(nextState).to.equal(Map({
         entries: List.of(
           'trainspotting',
           '28 days later'
@@ -43,7 +43,7 @@ describe('core logic', () => {
 
   describe('next', () => {
     it('takes the next 2 entries on which to vote', () => {
-      const state = new Map({
+      const state = Map({
         entries: List.of(
           'trainspotting',
           '28 days later',
@@ -53,8 +53,8 @@ describe('core logic', () => {
 
       const nextState = next(state);
 
-      expect(nextState).to.equal(new Map({
-        vote: new Map({pair: List.of('trainspotting', '28 days later')}),
+      expect(nextState).to.equal(Map({
+        vote: Map({pair: List.of('trainspotting', '28 days later')}),
         entries: List.of('sunshine')
       }));
     });
