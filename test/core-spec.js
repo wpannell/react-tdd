@@ -107,7 +107,7 @@ describe('core logic', () => {
         vote: Map({
           pair: List.of('trainspotting', '28 days later')
         }),
-        movies: List.of('sunshine')
+        movies: List()
       });
 
       const nextState = vote(state, 'trainspotting');
@@ -117,7 +117,7 @@ describe('core logic', () => {
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 1})
         }),
-        movies: List.of('sunshine')
+        movies: List()
       }));
     });
 
@@ -127,7 +127,7 @@ describe('core logic', () => {
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 3, '28 days later': 2})
         }),
-        movies: List.of('sunshine')
+        movies: List()
       });
 
       const nextState = vote(state, 'trainspotting');
@@ -137,7 +137,7 @@ describe('core logic', () => {
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 4, '28 days later': 2})
         }),
-        movies: List.of('sunshine')
+        movies: List()
       }));
     });
   });
