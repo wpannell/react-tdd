@@ -55,9 +55,7 @@ describe('core logic', () => {
       const nextState = next(state);
 
       expect(nextState).to.equal(new Map({
-        vote: Map({
-          pair: List.of('trainspotting', '28 days later')
-        }),
+        vote: new Map({pair: List.of('trainspotting', '28 days later')}),
         entries: List.of('sunshine')
       }));
     });
