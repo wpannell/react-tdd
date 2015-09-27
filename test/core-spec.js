@@ -98,6 +98,22 @@ describe('core logic', () => {
         movies: List.of('127 hours', 'trainspotting', '28 days later')
       }));
     });
+
+    it('ends the vote by marking the winning movie', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('trainspotting', '28 days later'),
+          tally: Map({'trainspotting': 5, '28 days later': 1})
+        }),
+        movies: List()
+      });
+
+      const nextState = next(state);
+
+      expect(nextState).to.equal(Map({
+        winner: 'trainspotting'
+      }));
+    });
   });
 
   describe('vote', () => {
