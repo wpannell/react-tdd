@@ -1,20 +1,20 @@
 import {List, Map} from 'immutable';
 
-export function loadEntriesInto(state, entries) {
-  return state.set('entries', new List(entries));
+export function loadMoviesInto(state, movies) {
+  return state.set('movies', new List(movies));
 }
 
 export function next(state) {
-  const entries = state.get('entries');
+  const movies = state.get('movies');
   return state.merge({
-    vote: Map({pair: entries.take(2)}),
-    entries: entries.skip(2)
+    vote: Map({pair: movies.take(2)}),
+    movies: movies.skip(2)
   });
 }
 
-export function vote(state, entry) {
+export function vote(state, movie) {
   return state.updateIn(
-    ['vote', 'tally', entry],
+    ['vote', 'tally', movie],
     0,
     tally => tally + 1
   );

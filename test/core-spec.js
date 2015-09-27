@@ -1,50 +1,52 @@
 import {expect} from 'chai';
 import {List, Map} from 'immutable';
-import {loadEntriesInto, next, vote} from '../src/core';
+import {loadMoviesInto, next, vote} from '../src/core';
 
 describe('core logic', () => {
 
-  describe('load entries produces state ', () => {
+  describe('load movies produces new state ', () => {
 
     it('from immutable', () => {
       const state = Map();
 
-      const entries = (List.of(
+      const movies = (List.of(
         'trainspotting',
         '28 days later'
       ));
 
-      const nextState = loadEntriesInto(state, entries);
+      const nextState = loadMoviesInto(state, movies);
 
       expect(nextState).to.equal(Map({
-        entries: List.of(
+        movies: List.of(
           'trainspotting',
           '28 days later'
-        )}));
+        )})
+      );
     });
 
     it('from iterable', () => {
       const state = Map();
 
-      const entries = [
+      const movies = [
         'trainspotting',
         '28 days later'
       ];
 
-      const nextState = loadEntriesInto(state, entries);
+      const nextState = loadMoviesInto(state, movies);
 
       expect(nextState).to.equal(Map({
-        entries: List.of(
+        movies: List.of(
           'trainspotting',
           '28 days later'
-        )}));
+        )})
+      );
     });
   });
 
   describe('next', () => {
-    it('takes the next 2 entries on which to vote', () => {
+    it('takes the next 2 movies on which to vote', () => {
       const state = Map({
-        entries: List.of(
+        movies: List.of(
           'trainspotting',
           '28 days later',
           'sunshine'
@@ -55,7 +57,7 @@ describe('core logic', () => {
 
       expect(nextState).to.equal(Map({
         vote: Map({pair: List.of('trainspotting', '28 days later')}),
-        entries: List.of('sunshine')
+        movies: List.of('sunshine')
       }));
     });
   });
@@ -67,7 +69,7 @@ describe('core logic', () => {
         vote: Map({
           pair: List.of('trainspotting', '28 days later')
         }),
-        entries: List.of('sunshine')
+        movies: List.of('sunshine')
       });
 
       const nextState = vote(state, 'trainspotting');
@@ -77,7 +79,7 @@ describe('core logic', () => {
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 1})
         }),
-        entries: List.of('sunshine')
+        movies: List.of('sunshine')
       }));
     });
 
@@ -87,7 +89,7 @@ describe('core logic', () => {
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 3}, {'28 days later': 2})
         }),
-        entries: List.of('sunshine')
+        movies: List.of('sunshine')
       });
 
       const nextState = vote(state, 'trainspotting');
@@ -97,7 +99,7 @@ describe('core logic', () => {
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 4}, {'28 days later': 2})
         }),
-        entries: List.of('sunshine')
+        movies: List.of('sunshine')
       }));
     });
   });
