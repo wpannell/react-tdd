@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {List, Map} from 'immutable';
-import {loadEntriesInto, next} from '../src/core';
+import {loadEntriesInto, next, vote} from '../src/core';
 
 describe('core logic', () => {
 
@@ -61,13 +61,6 @@ describe('core logic', () => {
   });
 
   describe('vote', () => {
-    function vote(state, entry) {
-      return state.updateIn(
-        ['vote', 'tally', entry],
-        0,
-        tally => tally + 1
-      );
-    }
 
     it('creates a tally for the voted entry', () => {
       const state = Map({
