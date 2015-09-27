@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {List, Map} from 'immutable';
-import {loadEntriesInto} from '../src/core';
+import {loadEntriesInto, next} from '../src/core';
 
 describe('core logic', () => {
 
@@ -42,14 +42,6 @@ describe('core logic', () => {
   });
 
   describe('next', () => {
-
-    function next(state) {
-      const entries = state.get('entries');
-      return state.merge({
-        vote: Map({pair: entries.take(2)}),
-        entries: entries.skip(2)
-      });
-    }
 
     it('takes the next 2 entries on which to vote', () => {
       const state = new Map({
