@@ -3,7 +3,7 @@ import {loadMoviesInto, next} from './core';
 
 const executors = Map({
   LOAD_MOVIES: function(state, action) {return loadMoviesInto(state, action.movies)},
-  NEXT: function(state, action) {return next(state)},
+  NEXT: function(state) {return next(state)}
 });
 
 export default function reduce(state, action) {

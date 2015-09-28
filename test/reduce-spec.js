@@ -18,7 +18,19 @@ describe('reduce', () => {
     const action = {type: 'NEXT'};
     const nextState = reduce(firstState, action);
 
-    console.log(nextState)
+    expect(nextState).to.equal(
+      fromJS({
+        vote: {pair: ['trainspotting', '28 days later']},
+        movies: []
+      })
+    );
+  });
+
+  it('reduces VOTE', () => {
+    const firstState = fromJS({movies: ['trainspotting', '28 days later']});
+    const action = {type: 'NEXT'};
+    const nextState = reduce(firstState, action);
+
     expect(nextState).to.equal(
       fromJS({
         vote: {pair: ['trainspotting', '28 days later']},
