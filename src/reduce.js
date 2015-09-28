@@ -1,5 +1,5 @@
 import {Map} from 'immutable';
-import {loadMoviesInto, next, vote} from './core';
+import {loadMoviesInto, next, vote, INITIAL_STATE} from './core';
 
 const executors = Map({
   LOAD_MOVIES: function(state, action) {
@@ -12,6 +12,6 @@ const executors = Map({
     return vote(state, action.movie)}
 });
 
-export default function reduce(state, action) {
+export default function reduce(state = INITIAL_STATE, action = undefined) {
   return executors.get(action.type)(state, action);
 }
