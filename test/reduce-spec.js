@@ -4,9 +4,9 @@ import reduce from '../src/reduce';
 
 describe('reduce', () => {
   it('reduces LOAD_MOVIES', () => {
-    const firstState = Map();
+    const state = Map();
     const action = {type: 'LOAD_MOVIES', movies: ['trainspotting']};
-    const nextState = reduce(firstState, action);
+    const nextState = reduce(state, action);
 
     expect(nextState).to.equal(
       fromJS({movies: ['trainspotting']})
@@ -14,9 +14,9 @@ describe('reduce', () => {
   });
 
   it('reduces NEXT', () => {
-    const firstState = fromJS({movies: ['trainspotting', '28 days later']});
+    const state = fromJS({movies: ['trainspotting', '28 days later']});
     const action = {type: 'NEXT'};
-    const nextState = reduce(firstState, action);
+    const nextState = reduce(state, action);
 
     expect(nextState).to.equal(
       fromJS({
@@ -27,13 +27,20 @@ describe('reduce', () => {
   });
 
   it('reduces VOTE', () => {
-    const firstState = fromJS({movies: ['trainspotting', '28 days later']});
-    const action = {type: 'NEXT'};
-    const nextState = reduce(firstState, action);
+    const state = fromJS({
+      vote: {pair: ['trainspotting', '28 days later']},
+      movies: []
+    });
+
+    const action = {type: 'VOTE', movie: 'trainspotting'};
+    const nextState = reduce(state, action);
 
     expect(nextState).to.equal(
       fromJS({
-        vote: {pair: ['trainspotting', '28 days later']},
+        vote: {
+          pair: ['trainspotting', '28 days later'],
+          tally: {'trainspotting': 1}
+        },
         movies: []
       })
     );
