@@ -54,4 +54,21 @@ describe('reduce', () => {
       })
     );
   });
+
+  it('can be used as reducer', () => {
+    const actions = [
+      {type: 'LOAD_MOVIES', movies: ['trainspotting', '28 days later']},
+      {type: 'NEXT'},
+      {type: 'VOTE', movie: 'trainspotting'},
+      {type: 'VOTE', movie: '28 Days Later'},
+      {type: 'VOTE', movie: 'trainspotting'},
+      {type: 'NEXT'}
+    ];
+
+    const finalState = actions.reduce(reduce, Map());
+
+    expect(finalState).to.equal(fromJS({
+      winner: 'trainspotting'
+    }));
+  });
 });
