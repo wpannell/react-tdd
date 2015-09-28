@@ -9,48 +9,32 @@ describe('core logic', () => {
     it('from immutable', () => {
       const state = Map();
 
-      const movies = (List.of(
-        'trainspotting',
-        '28 days later'
-      ));
+      const movies = (List.of('trainspotting', '28 days later'));
 
       const nextState = loadMoviesInto(state, movies);
 
       expect(nextState).to.equal(Map({
-        movies: List.of(
-          'trainspotting',
-          '28 days later'
-        )})
-      );
+        movies: List.of('trainspotting', '28 days later')
+      }));
     });
 
     it('from iterable', () => {
       const state = Map();
 
-      const movies = [
-        'trainspotting',
-        '28 days later'
-      ];
+      const movies = ['trainspotting', '28 days later'];
 
       const nextState = loadMoviesInto(state, movies);
 
       expect(nextState).to.equal(Map({
-        movies: List.of(
-          'trainspotting',
-          '28 days later'
-        )})
-      );
+        movies: List.of('trainspotting', '28 days later')
+      }));
     });
   });
 
   describe('next', () => {
     it('takes the next 2 movies on which to vote', () => {
       const state = Map({
-        movies: List.of(
-          'trainspotting',
-          '28 days later',
-          'sunshine'
-        )
+        movies: List.of('trainspotting', '28 days later', 'sunshine')
       });
 
       const nextState = next(state);
@@ -66,8 +50,7 @@ describe('core logic', () => {
         vote: Map({
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 4, '28 days later': 2})
-        }),
-        movies: List.of('sunshine', 'millions', '127 hours')
+        }), movies: List.of('sunshine', 'millions', '127 hours')
       });
 
       const nextState = next(state);
@@ -75,8 +58,7 @@ describe('core logic', () => {
       expect(nextState).to.equal(Map({
         vote: Map({
           pair: List.of('sunshine', 'millions')
-        }),
-        movies: List.of('127 hours', 'trainspotting')
+        }), movies: List.of('127 hours', 'trainspotting')
       }));
     });
 
@@ -85,8 +67,7 @@ describe('core logic', () => {
         vote: Map({
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 5, '28 days later': 5})
-        }),
-        movies: List.of('sunshine', 'millions', '127 hours')
+        }), movies: List.of('sunshine', 'millions', '127 hours')
       });
 
       const nextState = next(state);
@@ -94,8 +75,7 @@ describe('core logic', () => {
       expect(nextState).to.equal(Map({
         vote: Map({
           pair: List.of('sunshine', 'millions')
-        }),
-        movies: List.of('127 hours', 'trainspotting', '28 days later')
+        }), movies: List.of('127 hours', 'trainspotting', '28 days later')
       }));
     });
 
@@ -104,8 +84,7 @@ describe('core logic', () => {
         vote: Map({
           pair: List.of('trainspotting', '28 days later'),
           tally: Map({'trainspotting': 5, '28 days later': 1})
-        }),
-        movies: List()
+        }), movies: List()
       });
 
       const nextState = next(state);
@@ -120,40 +99,28 @@ describe('core logic', () => {
 
     it('creates a tally for the voted entry', () => {
       const state = Map({
-        vote: Map({
-          pair: List.of('trainspotting', '28 days later')
-        }),
-        movies: List()
+        pair: List.of('trainspotting', '28 days later')
       });
 
       const nextState = vote(state, 'trainspotting');
 
       expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('trainspotting', '28 days later'),
-          tally: Map({'trainspotting': 1})
-        }),
-        movies: List()
+        pair: List.of('trainspotting', '28 days later'),
+        tally: Map({'trainspotting': 1})
       }));
     });
 
     it('increments a tally for the voted entry', () => {
       const state = Map({
-        vote: Map({
-          pair: List.of('trainspotting', '28 days later'),
-          tally: Map({'trainspotting': 3, '28 days later': 2})
-        }),
-        movies: List()
+        pair: List.of('trainspotting', '28 days later'),
+        tally: Map({'trainspotting': 3, '28 days later': 2})
       });
 
       const nextState = vote(state, 'trainspotting');
 
       expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('trainspotting', '28 days later'),
-          tally: Map({'trainspotting': 4, '28 days later': 2})
-        }),
-        movies: List()
+        pair: List.of('trainspotting', '28 days later'),
+        tally: Map({'trainspotting': 4, '28 days later': 2})
       }));
     });
   });

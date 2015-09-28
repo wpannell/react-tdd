@@ -9,7 +9,7 @@ const executors = Map({
     return next(state)},
 
   VOTE: function(state, action) {
-    return vote(state, action.movie)}
+    return state.update('vote', voteState => vote(voteState, action.movie))}
 });
 
 export default function reduce(state = INITIAL_STATE, action = undefined) {
