@@ -1,10 +1,6 @@
 import {expect} from 'chai';
 import {fromJS, Map} from 'immutable';
-import {loadMoviesInto} from '../src/core';
-
-function reduce(state, action) {
-  return loadMoviesInto(state, action.movies);
-}
+import reduce from '../src/reduce';
 
 describe('reduce', () => {
   it('reduces LOAD_MOVIES', () => {
