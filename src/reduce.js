@@ -1,8 +1,11 @@
+import {Map} from 'immutable';
 import {loadMoviesInto, next} from './core';
 
+const executors = Map({
+  LOAD_MOVIES: function(state, action) {return loadMoviesInto(state, action.movies)},
+  NEXT: function(state, action) {return next(state)},
+});
+
 export default function reduce(state, action) {
-  switch(action.type) {
-    case 'LOAD_MOVIES' : return loadMoviesInto(state, action.movies);
-    case 'NEXT' : return next(state);
-  }
+  return executors.get(action.type)(state, action);
 }
